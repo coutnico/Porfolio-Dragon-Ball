@@ -15,13 +15,8 @@
 </head>
 
 <body>
-    <div class="dragon">
-        <div class="body"></div>
-        <div class="head"></div>
-        <div class="tail"></div>
-    </div>
-
     <div class="main">
+        <canvas></canvas>
         <div class="row-cols-7 d-flex justify-content-md-center align-items-center ">
             <div class="col">
                 <a href="#sobremi&tecnologia" class="btn-dbz">
@@ -83,10 +78,10 @@
             </div>
         </div>
         <img class="vegetavsgoku" src="gif/dbz-pixel.gif" alt="">
+        <img class="shenlong" src="./img/shenlong.png" alt="">
     </div>
 
-    <section id="sobremi&tecnologia" class="w-100 h-100 py-5"
-        style="background: #333; padding-left: 50px;  padding-right: 50px;">
+    <section id="sobremi&tecnologia" class="w-100 h-100 py-5" style="background: #333; padding-left: 50px;  padding-right: 50px;">
         <div class="row-cols-2 w-100 d-flex justify-content-center  gap-5 ">
             <div class="col-md-4">
                 <h2 class="text-white texttitleIndice" style="font-family: 'Saiyan Sans', sans-serif;">Sobre mí</h2>
@@ -139,24 +134,124 @@
             <source src="" type="audio/mpeg">
         </audio>
     </div>
+
+
     <script>
         window.addEventListener('load', function () {
             var audio = document.getElementById('dragonBallAudio');
             audio.volume = 0.03; // Establece el volumen al 10%
         });
-        // Seleccionamos el dragón
-        const dragon = document.querySelector('.dragon');
 
-        // Detectamos el movimiento del mouse
-        document.addEventListener('mousemove', (e) => {
-            // Obtenemos las coordenadas del cursor
-            const x = e.clientX;
-            const y = e.clientY;
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext('2d');
+        // for intro motion
+        let mouseMoved = false;
 
-            // Actualizamos la posición del dragón
-            dragon.style.left = `${x - 50}px`; // Ajustamos el centro
-            dragon.style.top = `${y - 50}px`;
+        const pointer = {
+            x: .5 * window.innerWidth,
+            y: .5 * window.innerHeight,
+        }
+        const params = {
+            pointsNumber: 40,
+            widthFactor: .3,
+            mouseThreshold: .6,
+            spring: .4,
+            friction: .5
+        };
+
+        const trail = new Array(params.pointsNumber);
+        for (let i = 0; i < params.pointsNumber; i++) {
+            trail[i] = {
+                x: pointer.x,
+                y: pointer.y,
+                dx: 0,
+                dy: 0,
+            }
+        }
+
+        window.addEventListener("click", e => {
+            updateMousePosition(e.pageX, e.pageY);
         });
+        window.addEventListener("mousemove", e => {
+            mouseMoved = true;
+            updateMousePosition(e.pageX + 18, e.pageY + 20);
+        });
+        window.addEventListener("touchmove", e => {
+            mouseMoved = true;
+            updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
+        });
+
+        function updateMousePosition(eX, eY) {
+            pointer.x = eX;
+            pointer.y = eY;
+        }
+        function updateCursorPosition(event) {
+            const deltaX = event.pageX - pointer.x;
+            const deltaY = event.pageY - pointer.y;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > 0) {
+                    console.log("Derecha");
+                } else {
+                    console.log("Izquierda");
+                }
+            } else {
+                if (deltaY > 0) {
+                    console.log("Abajo");
+                } else {
+                    console.log("Arriba");
+                }
+            }
+        }
+
+        setupCanvas();
+        update(0);
+        window.addEventListener("resize", setupCanvas);
+
+
+        function update(t) {
+
+
+            // for intro motion
+            if (!mouseMoved) {
+                pointer.x = (.5 + .3 * Math.cos(.002 * t) * (Math.sin(.005 * t))) * window.innerWidth;
+                pointer.y = (.5 + .2 * (Math.cos(.005 * t)) + .1 * Math.cos(.01 * t)) * window.innerHeight;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            trail.forEach((p, pIdx) => {
+                const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
+                const spring = pIdx === 0 ? .4 * params.spring : params.spring;
+                p.dx += (prev.x - p.x) * spring;
+                p.dy += (prev.y - p.y) * spring;
+                p.dx *= params.friction;
+                p.dy *= params.friction;
+                p.x += p.dx;
+                p.y += p.dy;
+            });
+
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            ctx.moveTo(trail[0].x, trail[0].y);
+
+            for (let i = 1; i < trail.length - 1; i++) {
+                const xc = .5 * (trail[i].x + trail[i + 1].x);
+                const yc = .5 * (trail[i].y + trail[i + 1].y);
+                ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
+                ctx.lineWidth = params.widthFactor * (params.pointsNumber - i);
+                ctx.strokeStyle = "#DFC724"; // Color del trazo
+                ctx.stroke();
+            }
+            ctx.lineTo(trail[trail.length - 1].x, trail[trail.length - 1].y);
+            ctx.stroke();
+
+            window.requestAnimationFrame(update);
+        }
+
+        function setupCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
     </script>
 
 </body>
