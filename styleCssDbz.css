@@ -1,5 +1,4 @@
 body{
-    cursor: url('./img/cursor-dbz.png'), auto;    
     overflow-x: hidden;
     scrollbar-width: none;
 }
@@ -45,6 +44,10 @@ body{
     padding-right: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);
     text-decoration: none;
+}
+.btn-dbz:hover{
+    animation: transformation 10s infinite alternate;
+    cursor: pointer;
 }
 
 .btn-dbz img {
@@ -356,17 +359,29 @@ body{
     left: 26%;
     z-index: 999999;
 }
-.shenlong {
+
+.sombra-shenlong{
     position: absolute;
     width: 200px;
     height: 200px;
-    top: 8%;
+    top: 90%;
     left: 6%;
-    filter: drop-shadow(0 0 20px #F7DC6F) brightness(0.8);
+    box-shadow: 100px -575px 213px 168px rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    will-change: transform, filter;
+}
+.shenlong {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 4%;
+    left: 7%;
+    filter: drop-shadow(0 0 20px #F7DC6F) brightness(0.7);
     z-index: 4;
     will-change: transform, filter;
     animation: moverArribaAbajo 2s linear infinite, parpadeo 1s ease-in-out infinite;
 }
+
 
 @keyframes moverArribaAbajo {
     0%, 100% {
@@ -379,10 +394,10 @@ body{
 
 @keyframes parpadeo {
     0%, 100% {
-        filter: drop-shadow(0 0 40px #F7DC6F);
+        filter: drop-shadow(0 0 40px #F7DC6F) brightness(0.8);
     }
     50% {
-        filter: drop-shadow(0 0 40px #F49D0C);
+        filter: drop-shadow(0 0 40px #F49D0C) brightness(0.9);
     }
 }
 
@@ -486,65 +501,52 @@ body{
         /* El gradiente se mueve completamente a la izquierda */
     }
 }
-
-/* Contenedor del dragón */
-.dragon {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    pointer-events: none;
-    animation: float 2s ease-in-out infinite;
-}
-
-/* Cuerpo del dragón */
-.body {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #ff4b1f, #ff9068);
-    border-radius: 50%;
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    box-shadow: 0 0 20px rgba(255, 72, 31, 0.6);
-}
-
-/* Cabeza del dragón */
-.head {
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #ffa41b, #ff6f3c);
-    border-radius: 50%;
-    position: absolute;
-    top: -20px;
-    left: 35px;
-}
-
-/* Cola del dragón */
-.tail {
-    width: 20px;
-    height: 60px;
-    background: linear-gradient(135deg, #6a0572, #a4508b);
-    border-radius: 50%;
-    position: absolute;
-    top: 50px;
-    left: 20px;
-    transform: rotate(45deg);
-}
-
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(-5px);
-    }
-
-    50% {
-        transform: translateY(5px);
-    }
-}
-
 /* Estilos Cursor*/
 canvas {
     position: absolute;
     z-index:-1;
+    display: block;
+}
+
+
+.goku{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    bottom: 15%;
+    left: 26%;
+    animation: parpadeo 1s ease-in-out infinite;
+}
+.auraGoku{
+    position: absolute;
+    width: 160px;
+    height: 200px;
+    bottom: 13%;
+    left: 25%;
+    filter: drop-shadow(0px 19px 10px black)
+}
+.rayos{
+    position: absolute;
+    width: 160px;
+    height: 200px;
+    top: 13%;
+    left: 25%;
+}
+.freezer{
+    position: absolute;
+    width: 110px;
+    height: 130px;
+    bottom: 50%;
+    right: 26%;
+    filter: drop-shadow(0 40px 20px black);
+}
+.esferasdeldragon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 37%;
+    left: 12%;
+    filter: drop-shadow(0 0 20px #F7DC6F) brightness(0.7);
+    animation: parpadeo 1s ease-in-out infinite;
+    z-index: 4;
 }
