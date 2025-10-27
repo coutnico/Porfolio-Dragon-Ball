@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyPortfolio DBZ</title>
+    <!-- Mantengo el orden de los assets para no alterar estilos/posiciones -->
     <link rel="stylesheet" href="styleCssDbz.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -15,253 +16,175 @@
 </head>
 
 <body>
+    <!-- #region Plano principal y navegación -->
     <div class="main">
+        <canvas id="galaxy"></canvas>
+        <div class="ball" style="--size: 6rem; --top: 50; --left: 500; --bottom: auto; --right: auto; --opacity: 0.9 ;">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball"
+            style="--size: 3rem; --top: 200; --left: 300; --bottom: auto; --right: auto; --opacity: 0.4 ;">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball"
+            style="--size: 4rem; --top: auto; --left: 390; --bottom: 300; --right: auto; --opacity: 0.8 ;">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball" style="--size: 5rem; --top: auto; --left: 250; --bottom: 150; --right: auto; --opacity: 0.7">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball"
+            style="--size: 3rem; --top: 100; --left: auto; --bottom: auto; --right: 340; --opacity: 0.4 ;">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball"
+            style="--size: 4rem; --top: auto; --left: auto; --bottom: 350; --right: 490; --opacity: 0.8 ;">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+            </div>
+        </div>
+
+        <div class="ball" style="--size: 6rem; --top: auto; --left: auto; --bottom: 70; --right: 400; --opacity: 0.8">
+            <div class="shine"></div>
+            <div class="stars">
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+                <div class="star"></div>
+
+            </div>
+        </div>
+
         <canvas id="vuelo"></canvas>
+        <img src="img/shenlongverde.png" class="shenlong" alt="">
+        <!-- Rayos -->
         <canvas id="canvas"></canvas>
-        <div class="sombra-shenlong "></div>
-        <div class="row-cols-7 d-flex justify-content-md-center align-items-center " style="z-index: 999999;">
-            <div class="col">
+
+
+        <!-- Toggle flotante -->
+        <button id="sidebarToggle" class="sidebar-toggle" aria-controls="dbzSidebar" aria-expanded="false"
+            aria-label="Abrir menú">
+            ☰
+        </button>
+
+        <!-- Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+        <!-- Sidebar -->
+        <aside id="dbzSidebar" class="dbz-sidebar" aria-hidden="true">
+            <header class="dbz-sidebar__header">
+                <h2 class="dbz-sidebar__title">Secciones</h2>
+                <button id="sidebarClose" class="sidebar-close" aria-controls="dbzSidebar" aria-label="Cerrar menú"
+                    style="display: none;">
+                </button>
+            </header>
+
+
+            <nav class="dbz-sidebar__content" aria-label="Navegación principal">
                 <a href="#sobremi&tecnologia" class="btn-dbz">
                     <img src="https://i.ibb.co/VJ2Z29K/esfera1estrella.png" alt="1 Estrella">
                     <p>Sobre mi</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/253yb57/esfera2estrella.png" alt="esfera2estrella" border="0">
+                <a class="btn-dbz" href="#experiencia">
+                    <img src="https://i.ibb.co/253yb57/esfera2estrella.png" alt="2 Estrellas">
                     <p>Experiencia</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/bLqhTPX/esfera3estrella.png" alt="esfera3estrella" border="0">
+                <a class="btn-dbz" href="#proyectos">
+                    <img src="https://i.ibb.co/bLqhTPX/esfera3estrella.png" alt="3 Estrellas">
                     <p>Proyectos</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/kBR68R5/esfera4estrella.png" alt="esfera4estrella" border="0">
+                <a class="btn-dbz" href="#tecnologias">
+                    <img src="https://i.ibb.co/kBR68R5/esfera4estrella.png" alt="4 Estrellas">
                     <p>Tecnologias</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/tHbPDPY/esfer5estrella.png" alt="esfer5estrella" border="0">
+                <a class="btn-dbz" href="#estudios">
+                    <img src="https://i.ibb.co/tHbPDPY/esfer5estrella.png" alt="5 Estrellas">
                     <p>Estudios</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/fSfpVHw/esfera6estrella.png" alt="esfera6estrella" border="0">
+                <a class="btn-dbz" href="#contacto">
+                    <img src="https://i.ibb.co/fSfpVHw/esfera6estrella.png" alt="6 Estrellas">
                     <p>Contacto</p>
                 </a>
-            </div>
-            <div class="col">
-                <a class="btn-dbz">
-                    <img src="https://i.ibb.co/gzKrcKK/esfera7estrella.png" alt="esfera7estrella" border="0">
+                <a class="btn-dbz" href="#blog">
+                    <img src="https://i.ibb.co/gzKrcKK/esfera7estrella.png" alt="7 Estrellas">
                     <p>Blog</p>
                 </a>
-            </div>
-        </div>
-        <div class="row-cols-1 d-flex justify-content-center align-items-center animate__animated animate__fadeInUp"
-            style="margin-top: -180px; ">
+            </nav>
+        </aside>
+
+        <div class="submain">
             <div class="randar-box">
                 <input type="checkbox" checked class="randar-checkbox">
                 <div class="randar-top"></div>
                 <div class="randar-top-body"></div>
                 <div class="randar-content">
-                    <div class="randar-ballI"></div>
-                    <div class="randar-ballII"></div>
-                    <div class="randar-ballIII"></div>
-                    <img src="./img/file.png" alt="" width="100" height="100">
+                    <!-- Izquierda -->
+                    <div class="randar-ball" style="--top: 14; --left: 30; --bottom: 0; --right: 0;"></div>
+                    <div class="randar-ball" style="--top: 28; --left: 15; --bottom: 0; --right: 0;"></div>
+                    <div class="randar-ball" style="--top: 42; --left: 25; --bottom: 0; --right: 0;"></div>
+                    <div class="randar-ball" style="--top: 55; --left: 12; --bottom: 0; --right: 0;"></div>
+
+                    <!-- Derecha -->
+                    <div class="randar-ball" style="--top: 17; --left: 78; --bottom: 0; --right: 0;"></div>
+                    <div class="randar-ball" style="--top: 36; --left: 70; --bottom: 0; --right: 0;"></div>
+                    <div class="randar-ball" style="--top: 60; --left: 75; --bottom: 0; --right: 0;"></div>
+                    <img src="./img/file.png" alt="Avatar" width="100" height="100">
                 </div>
                 <p id="name">Nicolás Rodriguez</p>
                 <p id="description">Desarrollador de Software</p>
             </div>
         </div>
-        <img class="shenlong" src="./img/porunga.png" alt="">
-        <img class="goku" src="./img/gokuTransformandose.png" alt="">
-        <img class="auraGoku" src="./img/auraSaiyan2.png" alt="">
-        <img class="freezer" src="./img/freezer.png" alt="">
-        <img class="esferasdeldragon" src="./img/esferasdeldragon.png" alt="">
-    </div>
-
-    <div class="w-100 px-5" style="background: #333;  height: 1000px">
-        <div class="row row-cols-2 d-flex justify-content-center">
-            <div class="col-md-5">
-                <section id="sobremi" style="width: 100%; height: 77%;">
-                    <h2 class="text-white texttitleIndice" style="font-family: 'Saiyan Sans', sans-serif;">Sobre mí</h2>
-                    <div class="panelinfo">
-                        <img class="decoradorcara" src="img/Face_Goku.png" alt="">
-                        <p class="letradbz" style="margin: 75px;">
-                            Mi nombre Nicolás Rodriguez, tengo 21 años, soy desarrollador de software con experiencia en
-                            el
-                            rubro.
-                            Antes de entrar a la carrera de Técnico Universitario en Programación, estaba averiguando
-                            qué estudiar
-                            en base a mis gustos en la informática y la matematica.<br><br>
-                            Dicho y hecho, hoy en día ya estoy finalizando la carrera
-                            en la Universidad Tecnológica Nacional, y trabajo en una empresa multinacional de tracking
-                            como desarrollador backend, con todo un futuro por delante.
-                        </p>
-                    </div>
-                </section>
-            </div>
-            <div class="col">
-                <section id="sobremi" style="width: 100%; height: 77%;">
-                    <h2 class="text-white texttitleIndice" style="font-family: 'Saiyan Sans', sans-serif;">Experiencia
-                        Laboral</h2>
-                    <div class="panelinfo">
-                        <img class="decoradorcara" src="img/Face_Vegeta.png" alt="">
-                        <ul class="list-group list-group-flush ms-5" style="margin-top: 55px;">
-                            <li class="list-group-item letradbz">
-                                <span class="fw-bold">Vasile & Cía S.A.C.I:</span>
-                                Empresa lider de mercado dedicada a la pruducción
-                                de transforamadores de distribucion y potencia. Con respecto a mis tareas dentro de la
-                                empresa, desarrollaba desde 0 y supervisaba los sistemas internos de la empresa.
-                                Desarrollando asi sistemas que hoy en dia son utilizados para calculos de parte de la
-                                ingenieria para la elbaracion de transformadores, entre otros.
-                            </li>
-                            <li class="list-group-item letradbz">
-                                <span class="fw-bold">Micracel S.A:</span>
-                                Empresa multinacional dedicada al tracking de vehiculos, mi rol es de desarrollador
-                                backend, me encargo de los sitios productivos de Logistica, Alertas y Gerenciamiento de
-                                viajes. Este entorno me dio la oportunidad de empezar a trabajar herramienatas de Azure
-                                en la nube.
-                                Entre mis tareas, desarrollo las diferentes servicios que utilizan las paginas o
-                                aplicacion que provee la empresa, entre estos podemos encontrar: APIs, Service Fabrics,
-                                Azure Cloud Service, Azure Functions.
-                            </li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="fixed-bottom d-flex justify-content-end align-items-center">
+         <div class="fixed-bottom d-flex justify-content-end align-items-center">
             <audio id="dragonBallAudio" controls autoplay>
                 <source src="music/Dragon Ball GT Music.mp3" type="audio/mpeg">
             </audio>
         </div>
 
-        <script src="./code.js"></script>
-        <script>
-            window.addEventListener('load', function () {
-                var audio = document.getElementById('dragonBallAudio');
-                audio.volume = 0.03; // Establece el volumen al 10%
-            });
+        <!-- <div class="supersaiyajin">
+            <img class="goku" src="./img/gokuTransformandose.png" alt="Goku transformándose">
+            <img class="auraGoku" src="./img/auraSaiyan2.png" alt="Aura Super Saiyajin">
+        </div> -->
+        <!-- <img class="freezer" src="./img/freezer.png" alt="Freezer">  -->
+    </div>
+    <!-- #endregion Plano principal y navegación -->
 
-            const canvas = document.getElementById("vuelo");
-            const ctx = canvas.getContext('2d');
-            // for intro motion
-            let mouseMoved = false;
-
-            const pointer = {
-                x: .5 * window.innerWidth,
-                y: .5 * window.innerHeight,
-            }
-            const params = {
-                pointsNumber: 40,
-                widthFactor: .3,
-                mouseThreshold: .6,
-                spring: .4,
-                friction: .5
-            };
-
-            const trail = new Array(params.pointsNumber);
-            for (let i = 0; i < params.pointsNumber; i++) {
-                trail[i] = {
-                    x: pointer.x,
-                    y: pointer.y,
-                    dx: 0,
-                    dy: 0,
-                }
-            }
-
-            window.addEventListener("click", e => {
-                updateMousePosition(e.pageX, e.pageY);
-            });
-            window.addEventListener("mousemove", e => {
-                mouseMoved = true;
-                updateMousePosition(e.pageX + 18, e.pageY + 20);
-            });
-            window.addEventListener("touchmove", e => {
-                mouseMoved = true;
-                updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
-            });
-
-            function updateMousePosition(eX, eY) {
-                pointer.x = eX;
-                pointer.y = eY;
-            }
-            function updateCursorPosition(event) {
-                const deltaX = event.pageX - pointer.x;
-                const deltaY = event.pageY - pointer.y;
-
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (deltaX > 0) {
-                        console.log("Derecha");
-                    } else {
-                        console.log("Izquierda");
-                    }
-                } else {
-                    if (deltaY > 0) {
-                        console.log("Abajo");
-                    } else {
-                        console.log("Arriba");
-                    }
-                }
-            }
-
-            setupCanvas();
-            update(0);
-            window.addEventListener("resize", setupCanvas);
-
-
-            function update(t) {
-
-
-                // for intro motion
-                if (!mouseMoved) {
-                    pointer.x = (.5 + .3 * Math.cos(.002 * t) * (Math.sin(.005 * t))) * window.innerWidth;
-                    pointer.y = (.5 + .2 * (Math.cos(.005 * t)) + .1 * Math.cos(.01 * t)) * window.innerHeight;
-                }
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                trail.forEach((p, pIdx) => {
-                    const prev = pIdx === 0 ? pointer : trail[pIdx - 1];
-                    const spring = pIdx === 0 ? .4 * params.spring : params.spring;
-                    p.dx += (prev.x - p.x) * spring;
-                    p.dy += (prev.y - p.y) * spring;
-                    p.dx *= params.friction;
-                    p.dy *= params.friction;
-                    p.x += p.dx;
-                    p.y += p.dy;
-                });
-
-                ctx.lineCap = "round";
-                ctx.beginPath();
-                ctx.moveTo(trail[0].x, trail[0].y);
-
-                for (let i = 1; i < trail.length - 1; i++) {
-                    const xc = .5 * (trail[i].x + trail[i + 1].x);
-                    const yc = .5 * (trail[i].y + trail[i + 1].y);
-                    ctx.quadraticCurveTo(trail[i].x, trail[i].y, xc, yc);
-                    ctx.lineWidth = params.widthFactor * (params.pointsNumber - i);
-                    ctx.strokeStyle = "#DFC724"; // Color del trazo
-                    ctx.stroke();
-                }
-                ctx.lineTo(trail[trail.length - 1].x, trail[trail.length - 1].y);
-                ctx.stroke();
-
-                window.requestAnimationFrame(update);
-            }
-
-            function setupCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-        </script>
-
+    <!-- Mantengo la carga del script en el mismo lugar para no afectar comportamiento/posiciones -->
+    <script src="script.js"></script>
 </body>
 
 </html>
