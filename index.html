@@ -121,34 +121,105 @@
 
 
             <nav class="dbz-sidebar__content" aria-label="Navegación principal">
-                <a href="#sobremi&tecnologia" class="btn-dbz">
+                <button commandfor="dialogTematicaDBZ" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/VJ2Z29K/esfera1estrella.png" alt="1 Estrella">
-                    <p>Sobre mi</p>
-                </a>
-                <a class="btn-dbz" href="#experiencia">
+                    <p>¿Porque con tematica de Dragon Ball?</p>
+                </button>
+
+                <dialog id="dialogTematicaDBZ" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title text-center">¿Porque con tematica de Dragon Ball?</p>
+                        <p class="p-2">La elección de una temática inspirada en Dragon Ball no es fortuita. Este universo representa
+                            mucho más que una serie animada: se ha consolidado como un fenómeno cultural que ha
+                            trascendido generaciones y fronteras, influyendo en valores, creatividad y mentalidad de
+                            millones de personas alrededor del mundo.
+                            <br>
+                            Desde mi perspectiva, el diseño de un portfolio no debe limitarse a una estructura rígida o
+                            convencional, sino reflejar autenticidad, identidad y creatividad. La idea nunca fue
+                            simplemente mostrar proyectos, sino construir una experiencia inmersiva que comunique quién
+                            soy y de dónde surge mi inspiración. En ese sentido, la temática de Dragon Ball me permite
+                            expandir mis capacidades creativas y técnicas al máximo, proyectando algo único que pocas
+                            veces se ha visto aplicado de manera formal en el ámbito profesional.
+                            <br>
+                            Además, diversos estudios en psicología y comunicación han analizado el impacto positivo de
+                            esta serie en el desarrollo de valores personales. Investigaciones como la publicada en el
+                            <strong>Journal ofJournal of Psychology & Behavioral Science (2017)</strong> señalan que los contenidos de Dragon Ball
+                            promueven principios como la perseverancia, la amistad, el esfuerzo constante, la empatía y
+                            la superación personal —valores fundamentales también en el ejercicio profesional del
+                            desarrollo y la tecnología.
+                            <br>
+                            <br>    
+                            Por último, Dragon Ball forma parte de mi historia personal. Es una obra que marcó mi
+                            infancia y que sigo disfrutando hasta hoy. Representa un espacio emocional de inspiración y
+                            motivación constante, un recordatorio de que uno siempre vuelve a donde fue feliz.</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogSobreMi" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/253yb57/esfera2estrella.png" alt="2 Estrellas">
-                    <p>Experiencia</p>
-                </a>
-                <a class="btn-dbz" href="#proyectos">
+                    <p>Sobre Mi</p>
+                </button>
+
+                <dialog id="dialogSobreMi" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Sobre Mi</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogExperiencia" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/bLqhTPX/esfera3estrella.png" alt="3 Estrellas">
-                    <p>Proyectos</p>
-                </a>
-                <a class="btn-dbz" href="#tecnologias">
+                    <p>Experiencia</p>
+                </button>
+
+                <dialog id="dialogExperiencia" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Experiencia</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogProyectos" command="show-modal" class="btn-dbz" >
                     <img src="https://i.ibb.co/kBR68R5/esfera4estrella.png" alt="4 Estrellas">
-                    <p>Tecnologias</p>
-                </a>
-                <a class="btn-dbz" href="#estudios">
+                    <p>Proyectos</p>
+                </button>
+
+                <dialog id="dialogProyectos" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Proyectos</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogTecnologias" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/tHbPDPY/esfer5estrella.png" alt="5 Estrellas">
-                    <p>Estudios</p>
-                </a>
-                <a class="btn-dbz" href="#contacto">
+                    <p>Tecnologias</p>
+                </button>
+
+                <dialog id="dialogTecnologias" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Tecnologias</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogEstudios" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/fSfpVHw/esfera6estrella.png" alt="6 Estrellas">
-                    <p>Contacto</p>
-                </a>
-                <a class="btn-dbz" href="#blog">
+                    <p>Estudios</p>
+                </button>
+
+                <dialog id="dialogEstudios" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Estudios</p>
+                    </div>
+                </dialog>
+
+                <button commandfor="dialogContacto" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/gzKrcKK/esfera7estrella.png" alt="7 Estrellas">
-                    <p>Blog</p>
-                </a>
+                    <p>Contacto</p>
+                </button>
+
+                <dialog id="dialogContacto" closedby="any" class="card-dialog animate__animated animate__fadeIn">
+                    <div class="card-dialog-info">
+                        <p class="title">Contacto</p>
+                    </div>
+                </dialog>
             </nav>
         </aside>
 
@@ -170,15 +241,15 @@
                     <div class="randar-ball" style="--top: 60; --left: 75; --bottom: 0; --right: 0;"></div>
                     <img src="./img/file.png" alt="Avatar" width="100" height="100">
                 </div>
-                <p id="name">Nicolás Rodriguez</p>
-                <p id="description">Desarrollador de Software</p>
+                <p id="name">Nicolás Rodríguez</p>
+                <p id="description">Tecnico Universitario en Programación</p>
             </div>
         </div>
-        <div class="fixed-bottom d-flex justify-content-end align-items-center">
+        <!-- <div class="fixed-bottom d-flex justify-content-end align-items-center">
             <audio id="dragonBallAudio" controls autoplay>
                 <source src="music/Dragon Ball GT Music.mp3" type="audio/mpeg">
             </audio>
-        </div>
+        </div> -->
 
         <!-- <div class="supersaiyajin">
             <img class="goku" src="./img/gokuTransformandose.png" alt="Goku transformándose">
