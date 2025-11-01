@@ -52,7 +52,7 @@ body {
 }
 
 .btn-dbz:hover {
-    animation: transformation 10s infinite alternate;
+    animation: transformation 3s infinite alternate;
     cursor: pointer;
 }
 
@@ -65,7 +65,7 @@ body {
 
 @keyframes iluminate {
     0% {
-        filter: drop-shadow(0 0 3px #ffc107);
+        filter: drop-shadow(0 0 3px #3EC9D3);
     }
 
     100% {
@@ -286,27 +286,27 @@ body {
 }
 
 .randar-ball {
-  /* Variables configurables */
-  --top: 0;
-  --left: 0;
-  --right: 0;
-  --bottom: 0;
-  --size: 15px;
-  --color: #F7DC6F;
+    /* Variables configurables */
+    --top: 0;
+    --left: 0;
+    --right: 0;
+    --bottom: 0;
+    --size: 15px;
+    --color: #F7DC6F;
 
-  position: absolute;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background-color: var(--color);
-  box-shadow: 0 0 5px 2px var(--color);
-  animation: parpadeo 2s infinite;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: var(--color);
+    box-shadow: 0 0 5px 2px var(--color);
+    animation: parpadeo 2s infinite;
 
-  /* Traducción automática a % o 0 */
-  top: calc(var(--top) * 1%);
-  left: calc(var(--left) * 1%);
-  right: calc(var(--right) * 1%);
-  bottom: calc(var(--bottom) * 1%);
+    /* Traducción automática a % o 0 */
+    top: calc(var(--top) * 1%);
+    left: calc(var(--left) * 1%);
+    right: calc(var(--right) * 1%);
+    bottom: calc(var(--bottom) * 1%);
 }
 
 
@@ -368,11 +368,7 @@ body {
 
 @keyframes transformation {
     0% {
-        box-shadow: 0 0 20px #F7DC6F;
-    }
-
-    50% {
-        box-shadow: 0 0 20px #F7DC6F, 0 0 10px #F49D0C;
+        box-shadow: 0 0 20px #3EC9D3;
     }
 
     100% {
@@ -611,8 +607,6 @@ canvas {
     display: grid;
     align-content: start;
     gap: 10px;
-    padding-top: 10px;
-    overflow-y: auto;
 }
 
 .ball {
@@ -733,8 +727,10 @@ canvas {
 }
 
 audio::-webkit-media-controls-panel {
-  background-color: #000 !important; /* negro */
-  color: #fff !important;            /* texto e íconos blancos */
+    background-color: #000 !important;
+    /* negro */
+    color: #fff !important;
+    /* texto e íconos blancos */
 }
 
 audio::-webkit-media-controls-play-button,
@@ -742,58 +738,149 @@ audio::-webkit-media-controls-timeline,
 audio::-webkit-media-controls-current-time-display,
 audio::-webkit-media-controls-time-remaining-display,
 audio::-webkit-media-controls-volume-slider {
-  filter: invert(1); /* invierte color para íconos blancos */
+    filter: invert(1);
+    /* invierte color para íconos blancos */
 }
 
 
 .card-dialog {
- --background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
- min-width: 500px;
- padding: 5px;
- border-radius: 1rem;
- overflow: visible;
- background: #f7ba2b;
- background: var(--background);
- position: relative;
- z-index: 1;
+    --background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
+    min-width: 35dvw;
+    max-width: 65dvw;
+    padding: 2px;
+    border-radius: 1rem;
+    overflow: visible;
+    background: #f7ba2b;
+    background: var(--background);
+    position: relative;
+    z-index: 1;
 }
 
 .card-dialog::after {
- position: absolute;
- content: "";
- top: 30px;
- left: 0;
- right: 0;
- z-index: -1;
- height: 100%;
- width: 100%;
- transform: scale(0.8);
- filter: blur(25px);
- background: #f7ba2b;
- background: var(--background);
- transition: opacity .5s;
+    position: absolute;
+    content: "";
+    top: 30px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.8);
+    filter: blur(25px);
+    background: #f7ba2b;
+    background: var(--background);
+    transition: opacity .5s;
 }
+
 
 .card-dialog-info {
- --color: #181818;
- background: var(--color);
- color: var(--color);
- display: grid;
- justify-content: center;
- width: 100%;
- min-height: 400px;
- height: 100%;
- overflow: visible;
- border-radius: .7rem;
-  color: #f7ba2b;
+    --color: #181818;
+    background: var(--color);
+    color: var(--color);
+    display: grid;
+    width: 100%;
+    min-height: 20dvh;
+    height: 100%;
+    overflow: visible;
+    border-radius: .7rem;
+    color: #f7ba2b;
+    padding: 5px;
 }
 
+
 .card-dialog .title {
- font-weight: bold;
- letter-spacing: .1em;
+    font-weight: bold;
+    letter-spacing: .1em;
+    text-align: center;
 }
 
 .card-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.3); /* oscurece el fondo */
-  backdrop-filter: blur(3px);     /* opcional: difumina el fondo */
+    background: rgba(0, 0, 0, 0.3);
+    /* oscurece el fondo */
+    backdrop-filter: blur(3px);
+    /* opcional: difumina el fondo */
+}
+
+.capsulecorp-container {
+  position: relative;
+  background-color: #1C4595;
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 0 5px black;
+  overflow: hidden; /* necesario para el borde pseudo */
+  transition: 0.3s ease;
+}
+
+/* Capa pseudo que simula el borde */
+.capsulecorp-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 3px; /* grosor del borde */
+  background: linear-gradient(90deg, #00C8FF, #A8F9FF, #00C8FF);
+  background-size: 200% 200%;
+  opacity: 0; /* invisible por defecto */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* no interfiere con clicks */
+}
+
+/* Activar animación al hacer hover */
+.capsulecorp-container:hover::before {
+  opacity: 1;
+  animation: borderGradientMove 2s linear infinite;
+}
+
+.capsulecorp-container:hover{
+    box-shadow: 0 0 5px white;
+}
+
+.capsulecorp {
+  height: 145px;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 0 3px black);
+  transform: scale(1);
+  transition: transform 0.8s ease-in-out; /* transición suave al salir */
+  margin: 0 auto
+}
+
+.capsulecorp:hover {
+  cursor: pointer;
+  transform: scale(1.1) rotate(3deg); /* leve zoom y rotación */
+}
+
+.capsulecorp-container h6{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@keyframes zoomRotate {
+  0% {
+    transform: scale(1) ;
+  }
+  50% {
+    transform: scale(1.10) ;
+  }
+  100% {
+    transform: scale(1.05) ;
+  }
+}
+
+@keyframes borderGradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }

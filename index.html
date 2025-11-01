@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
+
+    <!-- #region Favicon -->
     <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="favicon/site.webmanifest" />
-    <!-- Mantengo el orden de los assets para no alterar estilos/posiciones -->
+    <link rel="icon" type="image/svg+xml" href="favicon//favicon.svg" />
+    <link rel="shortcut icon" href="favicon//favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon//apple-touch-icon.png" />
+    <link rel="manifest" href="favicon//site.webmanifest" />
+    <!-- #endregion -->
+
     <link rel="stylesheet" href="styleCssDbz.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -128,8 +131,9 @@
 
                 <dialog id="dialogTematicaDBZ" closedby="any" class="card-dialog animate__animated animate__fadeIn">
                     <div class="card-dialog-info">
-                        <p class="title text-center">¿Porque con tematica de Dragon Ball?</p>
-                        <p class="p-2">La elección de una temática inspirada en Dragon Ball no es fortuita. Este universo representa
+                        <p class="title">¿Porque con tematica de Dragon Ball?</p>
+                        <p class="p-2 text-light">La elección de una temática inspirada en Dragon Ball no es fortuita.
+                            Este universo representa
                             mucho más que una serie animada: se ha consolidado como un fenómeno cultural que ha
                             trascendido generaciones y fronteras, influyendo en valores, creatividad y mentalidad de
                             millones de personas alrededor del mundo.
@@ -143,15 +147,17 @@
                             <br>
                             Además, diversos estudios en psicología y comunicación han analizado el impacto positivo de
                             esta serie en el desarrollo de valores personales. Investigaciones como la publicada en el
-                            <strong>Journal ofJournal of Psychology & Behavioral Science (2017)</strong> señalan que los contenidos de Dragon Ball
+                            <strong>Journal of Journal of Psychology & Behavioral Science (2017)</strong> señalan que
+                            los contenidos de Dragon Ball
                             promueven principios como la perseverancia, la amistad, el esfuerzo constante, la empatía y
                             la superación personal —valores fundamentales también en el ejercicio profesional del
                             desarrollo y la tecnología.
                             <br>
-                            <br>    
+                            <br>
                             Por último, Dragon Ball forma parte de mi historia personal. Es una obra que marcó mi
                             infancia y que sigo disfrutando hasta hoy. Representa un espacio emocional de inspiración y
-                            motivación constante, un recordatorio de que uno siempre vuelve a donde fue feliz.</p>
+                            motivación constante, un recordatorio de que uno siempre vuelve a donde fue feliz.
+                        </p>
                     </div>
                 </dialog>
 
@@ -163,21 +169,37 @@
                 <dialog id="dialogSobreMi" closedby="any" class="card-dialog animate__animated animate__fadeIn">
                     <div class="card-dialog-info">
                         <p class="title">Sobre Mi</p>
+                        <p class="px-2 text-light">Mi nombre es Nicolas Rodríguez, me dedico a la programacion desde
+                            hace
+                            4 años con experiencia solida en el rubro. Actualmente vivo en Buenos Aires, Argentina. Amo
+                            a lo que me dedico, y me gusta estar en constante aprendizaje. </p>
                     </div>
                 </dialog>
 
                 <button commandfor="dialogExperiencia" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/bLqhTPX/esfera3estrella.png" alt="3 Estrellas">
-                    <p>Experiencia</p>
+                    <p>Experiencia Laboral</p>
                 </button>
 
                 <dialog id="dialogExperiencia" closedby="any" class="card-dialog animate__animated animate__fadeIn">
                     <div class="card-dialog-info">
-                        <p class="title">Experiencia</p>
+                        <p class="title">Experiencia Laboral</p>
+                        <div class="d-flex justify-content-around align-items-center w-100">
+                            <div class="capsulecorp-container">
+                                <img class="capsulecorp" src="img/CapsulaCorpVioleta.png" alt="">
+                                <h6>Micracel S.A</h6>
+                                <p class="fw-semibold">Oct 2024 - Actualidad</p>
+                            </div>
+                            <div class="capsulecorp-container">
+                                <img class="capsulecorp" src="img/CapsuleCorpVerde.png" alt="">
+                                <h6>Vasile S.A.C.I</h6>
+                                <p class="fw-semibold">Mar 2024 - Oct 2024</p>
+                            </div>
+                        </div>
                     </div>
                 </dialog>
 
-                <button commandfor="dialogProyectos" command="show-modal" class="btn-dbz" >
+                <button commandfor="dialogProyectos" command="show-modal" class="btn-dbz">
                     <img src="https://i.ibb.co/kBR68R5/esfera4estrella.png" alt="4 Estrellas">
                     <p>Proyectos</p>
                 </button>
@@ -245,11 +267,11 @@
                 <p id="description">Tecnico Universitario en Programación</p>
             </div>
         </div>
-        <!-- <div class="fixed-bottom d-flex justify-content-end align-items-center">
+        <div class="fixed-bottom d-flex justify-content-end align-items-center">
             <audio id="dragonBallAudio" controls autoplay>
                 <source src="music/Dragon Ball GT Music.mp3" type="audio/mpeg">
             </audio>
-        </div> -->
+        </div>
 
         <!-- <div class="supersaiyajin">
             <img class="goku" src="./img/gokuTransformandose.png" alt="Goku transformándose">

@@ -1,6 +1,6 @@
 {
-  "name": "PorfolioDBZ",
-  "short_name": "DBZ",
+  "name": "MySite",
+  "short_name": "Site",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
