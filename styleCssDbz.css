@@ -345,13 +345,14 @@ body {
 
 .shenlong {
     position: fixed;
-    width: 38dvw;
-    height: 120dvh;
-    bottom: -22%;
+    width: 37dvw;
+    height: 130dvh;
+    bottom: -25%;
     right: -10%;
     mask-image: linear-gradient(black 60%, transparent);
-    filter: drop-shadow(0 0 10px #5DD30A);
+    filter: drop-shadow(0 0 15px #5DD30A);
     transform: rotate(5deg);
+    opacity: 0.8;
 }
 
 .cuerpo-shenlong{
@@ -361,7 +362,7 @@ body {
     bottom: -30%;
     left: 20%;
     mask-image: linear-gradient(black 60%, transparent);
-    filter: drop-shadow(0 0 10px #5DD30A);
+    filter: drop-shadow(0 0 15px #5DD30A);
     transform: rotate(80deg);
 }
 
