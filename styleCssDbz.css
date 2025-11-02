@@ -851,7 +851,7 @@ audio::-webkit-media-controls-volume-slider {
   margin: 0 auto
 }
 
-.capsulecorp:hover {
+.capsulecorp-container:hover .capsulecorp {
   cursor: pointer;
   transform: scale(1.1) rotate(3deg); /* leve zoom y rotación */
 }
