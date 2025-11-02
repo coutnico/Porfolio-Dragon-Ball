@@ -345,12 +345,24 @@ body {
 
 .shenlong {
     position: fixed;
-    width: 40dvw;
-    height: 100dvh;
-    bottom: 0;
+    width: 38dvw;
+    height: 120dvh;
+    bottom: -22%;
     right: -10%;
     mask-image: linear-gradient(black 60%, transparent);
-    filter: drop-shadow(0 0 1px black);
+    filter: drop-shadow(0 0 10px #5DD30A);
+    transform: rotate(5deg);
+}
+
+.cuerpo-shenlong{
+    position: fixed;
+    width: 38dvw;
+    height: 40dvh;
+    bottom: -30%;
+    left: 20%;
+    mask-image: linear-gradient(black 60%, transparent);
+    filter: drop-shadow(0 0 10px #5DD30A);
+    transform: rotate(80deg);
 }
 
 .panelinfo {
@@ -809,6 +821,12 @@ audio::-webkit-media-controls-volume-slider {
   box-shadow: 0 0 5px black;
   overflow: hidden; /* necesario para el borde pseudo */
   transition: 0.3s ease;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: white;
 }
 
 /* Capa pseudo que simula el borde */
