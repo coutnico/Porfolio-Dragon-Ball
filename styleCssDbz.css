@@ -79,6 +79,8 @@ body {
     display: flex;
     align-items: center;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -355,7 +357,7 @@ body {
     opacity: 0.8;
 }
 
-.cuerpo-shenlong{
+.cuerpo-shenlong {
     position: fixed;
     width: 38dvw;
     height: 40dvh;
@@ -547,7 +549,7 @@ canvas {
     transform: translateX(-100%);
     /* <- sale por la IZQUIERDA */
     transition: transform .35s ease, box-shadow .35s ease;
-    padding: 18px 16px 24px;
+    /* padding: 18px 16px 24px; */
     z-index: 9999;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -591,7 +593,7 @@ canvas {
 /* Botón único (abre/cierra). Por defecto: arriba-izquierda de la pantalla */
 .sidebar-toggle {
     position: fixed;
-    top: 16px;
+    top: 8px;
     left: 16px;
     width: 44px;
     height: 44px;
@@ -759,10 +761,10 @@ audio::-webkit-media-controls-volume-slider {
 .card-dialog {
     --background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
     min-width: 35dvw;
-    max-width: 65dvw;
+    max-width: 70dvw;
     padding: 2px;
     border-radius: 1rem;
-    overflow: visible;
+    overflow: hidden;
     background: #f7ba2b;
     background: var(--background);
     position: relative;
@@ -793,17 +795,17 @@ audio::-webkit-media-controls-volume-slider {
     display: grid;
     width: 100%;
     min-height: 20dvh;
-    height: 100%;
-    overflow: visible;
+    overflow: auto;
     border-radius: .7rem;
     color: #f7ba2b;
     padding: 5px;
+    max-height: 100vh;
 }
 
 
 .card-dialog .title {
     font-weight: bold;
-    letter-spacing: .1em;
+    letter-spacing: .12em;
     text-align: center;
 }
 
@@ -815,67 +817,73 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 .capsulecorp-container {
-  position: relative;
-  background-color: #1C4595;
-  border-radius: 30px;
-  padding: 10px;
-  box-shadow: 0 0 5px black;
-  overflow: hidden; /* necesario para el borde pseudo */
-  transition: 0.3s ease;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  text-decoration: none;
-  color: white;
+    position: relative;
+    background-color: #1C4595;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 0 0 5px black;
+    overflow: hidden;
+    /* necesario para el borde pseudo */
+    transition: 0.3s ease;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: white;
 }
 
 /* Capa pseudo que simula el borde */
 .capsulecorp-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 3px; /* grosor del borde */
-  background: linear-gradient(90deg, #00C8FF, #A8F9FF, #00C8FF);
-  background-size: 200% 200%;
-  opacity: 0; /* invisible por defecto */
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* no interfiere con clicks */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 3px;
+    /* grosor del borde */
+    background: linear-gradient(90deg, #00C8FF, #A8F9FF, #00C8FF);
+    background-size: 200% 200%;
+    opacity: 0;
+    /* invisible por defecto */
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    /* no interfiere con clicks */
 }
 
 /* Activar animación al hacer hover */
 .capsulecorp-container:hover::before {
-  opacity: 1;
-  animation: borderGradientMove 2s linear infinite;
+    opacity: 1;
+    animation: borderGradientMove 2s linear infinite;
 }
 
-.capsulecorp-container:hover{
+.capsulecorp-container:hover {
     box-shadow: 0 0 5px white;
 }
 
 .capsulecorp {
-  height: 145px;
-  width: 100%;
-  display: inline-block;
-  position: relative;
-  filter: drop-shadow(0 0 3px black);
-  transform: scale(1);
-  transition: transform 0.8s ease-in-out; /* transición suave al salir */
-  margin: 0 auto
+    height: 145px;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    filter: drop-shadow(0 0 3px black);
+    transform: scale(1);
+    transition: transform 0.8s ease-in-out;
+    /* transición suave al salir */
+    margin: 0 auto
 }
 
 .capsulecorp-container:hover .capsulecorp {
-  cursor: pointer;
-  transform: scale(1.1) rotate(3deg); /* leve zoom y rotación */
+    cursor: pointer;
+    transform: scale(1.1) rotate(3deg);
+    /* leve zoom y rotación */
 }
 
-.capsulecorp-container h6{
+.capsulecorp-container h6 {
     color: white;
     text-align: center;
     font-size: 20px;
@@ -884,22 +892,57 @@ audio::-webkit-media-controls-volume-slider {
 }
 
 @keyframes zoomRotate {
-  0% {
-    transform: scale(1) ;
-  }
-  50% {
-    transform: scale(1.10) ;
-  }
-  100% {
-    transform: scale(1.05) ;
-  }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.10);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
 }
 
 @keyframes borderGradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .card-dialog {
+        max-width: 80dvw;
+    }
+
+    .btn-dbz p {
+        /* max-width: 200px; */
+        font-size: 12px;
+    }
+
+    .shenlong {
+        display: none;
+    }
+
+    .dbz-sidebar__header {
+        padding: 25px 16px 10px;
+    }
+
+    .capsulecorp-container {
+        max-height: 27dvh;
+    }
+
+    .capsulecorp-container h6 {
+    font-size: 15px;
+    }
+
+    .capsulecorp {
+        height: 100px;
+    }
 }
