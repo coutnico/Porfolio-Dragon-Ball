@@ -345,9 +345,187 @@
       // document.body.style.overflow = ''; // opcional
     }
   }
+  // -----------------------------------------------------------------------
+  // 4) MODALS (gestiona <dialog> con fallback para mobile)
+  // -----------------------------------------------------------------------
+  class ModalManager {
+    constructor({ selectorBtn = '[command][commandfor]', selectorDlg = 'dialog' } = {}) {
+      this.supportsDialog = typeof HTMLDialogElement === 'function' &&
+                            'showModal' in HTMLDialogElement.prototype;
+
+      this.selectorBtn = selectorBtn;
+      this.selectorDlg = selectorDlg;
+
+      this.overlay = null;       // overlay fallback
+      this.openDialogRef = null; // dialog actualmente abierto (1 a la vez)
+      this.lastFocused = null;
+
+      this.enabled = true;
+      this._bind();
+    }
+
+    _bind() {
+      // Abrir con [command="show-modal"] y [commandfor="idDelDialog"]
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest(this.selectorBtn);
+        if (!btn) return;
+
+        const cmd = (btn.getAttribute('command') || '').toLowerCase();
+        if (cmd !== 'show-modal') return;
+        const targetId = btn.getAttribute('commandfor');
+        const dialog = document.getElementById(targetId);
+        if (!dialog || dialog.nodeName.toLowerCase() !== 'dialog') {
+          console.warn('[ModalManager] No se encontró <dialog> con id:', targetId);
+          return;
+        }
+        this.open(dialog);
+      });
+
+      // Cierre por botones internos con [data-close]
+      document.addEventListener('click', (e) => {
+        const closer = e.target.closest('[data-close]');
+        if (!closer) return;
+        const dlg = closer.closest('dialog');
+        if (dlg && dlg === this.openDialogRef) this.close(dlg);
+      });
+
+      // Cierre por ESC (nativo y fallback)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.openDialogRef) this.close(this.openDialogRef);
+      });
+
+      // Click “afuera” para cerrar (respeta closedby="any")
+      document.querySelectorAll(this.selectorDlg).forEach((dlg) => {
+        dlg.addEventListener('mousedown', (e) => {
+          if (!this._canCloseByOutside(dlg)) return;
+          const r = dlg.getBoundingClientRect();
+          const outside =
+            e.clientX < r.left || e.clientX > r.right ||
+            e.clientY < r.top  || e.clientY > r.bottom;
+          if (outside) this.close(dlg);
+        });
+      });
+    }
+
+    _canCloseByOutside(dlg) {
+      // Usa tu atributo `closedby="any"` para permitir click afuera
+      const attr = (dlg.getAttribute('closedby') || '').toLowerCase();
+      return attr === 'any' || attr === 'outside' || attr === 'true';
+    }
+
+    open(dialog) {
+      if (this.openDialogRef) this.close(this.openDialogRef);
+
+      this.lastFocused = document.activeElement;
+      this.openDialogRef = dialog;
+
+      if (this.supportsDialog) {
+        dialog.showModal();
+        this._trapFocus(dialog);
+        return;
+      }
+
+      // Fallback sin CSS adicional (overlay inline)
+      this._createOverlay();
+      dialog.setAttribute('open', '');
+      dialog.style.position = 'fixed';
+      dialog.style.inset = '50% auto auto 50%';
+      dialog.style.transform = 'translate(-50%, -50%)';
+      dialog.style.zIndex = '1001';
+
+      this._lockScroll(true);
+      this._trapFocus(dialog);
+    }
+
+    close(dialog) {
+      if (!dialog) return;
+
+      if (this.supportsDialog) {
+        if (dialog.open) dialog.close();
+      } else {
+        dialog.removeAttribute('open');
+        dialog.style.position = '';
+        dialog.style.inset = '';
+        dialog.style.transform = '';
+        dialog.style.zIndex = '';
+        this._removeOverlay();
+        this._lockScroll(false);
+      }
+
+      this._releaseFocus();
+      if (this.lastFocused) { try { this.lastFocused.focus(); } catch(_){} }
+      this.lastFocused = null;
+      this.openDialogRef = null;
+    }
+
+    _createOverlay() {
+      if (this.overlay) return;
+      const ov = document.createElement('div');
+      ov.setAttribute('data-modal-overlay', '');
+      // Estilos inline para no tocar tu CSS
+      Object.assign(ov.style, {
+        position: 'fixed',
+        inset: '0',
+        background: 'rgba(0,0,0,0.3)',
+        backdropFilter: 'blur(3px)',
+        zIndex: '1000'
+      });
+      ov.addEventListener('click', () => this.openDialogRef && this.close(this.openDialogRef));
+      document.body.appendChild(ov);
+      this.overlay = ov;
+    }
+
+    _removeOverlay() {
+      if (!this.overlay) return;
+      this.overlay.remove();
+      this.overlay = null;
+    }
+
+    _lockScroll(locked) {
+      if (locked) {
+        this._scrollTop = window.scrollY || document.documentElement.scrollTop;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this._scrollTop}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        return;
+      }
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      window.scrollTo(0, this._scrollTop || 0);
+    }
+
+    _trapFocus(dialog) {
+      // Focus inicial
+      const firstFocusable = dialog.querySelector('a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])');
+      (firstFocusable || dialog).focus({ preventScroll: true });
+
+      // Ciclo de tabulación
+      const selector = 'a, button, input, textarea, select, [tabindex]:not([tabindex="-1"])';
+      const enforce = (e) => {
+        if (e.key !== 'Tab') return;
+        const list = [...dialog.querySelectorAll(selector)].filter(el => !el.disabled && el.offsetParent !== null);
+        if (!list.length) { e.preventDefault(); return; }
+        const first = list[0], last = list[list.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      };
+      dialog.addEventListener('keydown', enforce);
+      dialog._trapHandler = enforce;
+    }
+
+    _releaseFocus() {
+      const dlg = this.openDialogRef;
+      if (!dlg || !dlg._trapHandler) return;
+      dlg.removeEventListener('keydown', dlg._trapHandler);
+      delete dlg._trapHandler;
+    }
+  }
 
   // -----------------------------------------------------------------------
-  // 4) AUDIO volumen (si existe)
+  // 5) AUDIO volumen (si existe)
   // -----------------------------------------------------------------------
   function initAudio() {
     const audio = $('#dragonBallAudio');
@@ -358,7 +536,7 @@
     try { audio.volume = 0.03; } catch { /* noop */ }
   }
   // -----------------------------------------------------------------------
-  // 5) Fondo Estrellado
+  // 6) Fondo Estrellado
   // -----------------------------------------------------------------------
   class Estrellado {
     constructor(canvas) {
@@ -436,7 +614,7 @@
     }
   }
   // -----------------------------------------------------------------------
-  // 6) BOOTSTRAP
+  // 7) BOOTSTRAP
   // -----------------------------------------------------------------------
   const boot = () => {
     console.clear();
@@ -461,6 +639,8 @@
       closeSel: '#sidebarClose',
       overlaySel: '#sidebarOverlay'
     });
+
+    const modals = new ModalManager();
 
     initAudio();
 
