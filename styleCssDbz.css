@@ -622,7 +622,6 @@ canvas {
     display: grid;
     align-content: start;
     gap: 10px;
-    padding: 10px;
 }
 
 .ball {
@@ -765,31 +764,44 @@ audio::-webkit-media-controls-volume-slider {
     max-width: 70dvw;
     padding: 2px;
     border-radius: 1rem;
+    overflow: hidden;
+    background: #f7ba2b;
     background: var(--background);
     position: relative;
     z-index: 1;
-    overflow-y: auto;
-    /* 👇 límite de alto del dialog respecto al viewport */
-    max-height: 90dvh;
 }
+
+.card-dialog::after {
+    position: absolute;
+    content: "";
+    top: 30px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.8);
+    filter: blur(25px);
+    background: #f7ba2b;
+    background: var(--background);
+    transition: opacity .5s;
+}
+
 
 .card-dialog-info {
     --color: #181818;
     background: var(--color);
-    color: #f7ba2b;
-    display: block;
+    color: var(--color);
+    display: grid;
     width: 100%;
+    min-height: 20dvh;
+    overflow: auto;
     border-radius: .7rem;
+    color: #f7ba2b;
     padding: 5px;
-
-    /* 👇 que ocupe todo lo que pueda dentro del dialog */
-    flex: 1;
-    /* 👇 MUY importante para que flex permita el scroll interno */
-    height: 100%;
-
-    /* 👇 scroll solo si se pasa de alto */
-    overflow-y: auto;
+    max-height: 100vh;
 }
+
 
 .card-dialog .title {
     font-weight: bold;
@@ -799,9 +811,10 @@ audio::-webkit-media-controls-volume-slider {
 
 .card-dialog::backdrop {
     background: rgba(0, 0, 0, 0.3);
+    /* oscurece el fondo */
     backdrop-filter: blur(3px);
+    /* opcional: difumina el fondo */
 }
-
 
 .capsulecorp-container {
     position: relative;
