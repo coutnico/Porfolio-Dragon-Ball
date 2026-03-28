@@ -1,289 +1,417 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <meta name="description"
+        content="Portfolio de Nicolás Rodríguez, desarrollador backend con una propuesta visual inspirada en Dragon Ball y una ejecución orientada a producto.">
+    <title>Nicolás Rodríguez | Portfolio</title>
 
-    <!-- #region Favicon -->
-    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="favicon/site.webmanifest" />
-    <!-- #endregion -->
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styleCssDbz.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- #region Plano principal y navegación -->
-    <div class="main">
-        <canvas id="galaxy"></canvas>
-        <div class="ball" style="--size: 6rem; --top: 50; --left: 500; --bottom: auto; --right: auto; --opacity: 0.9 ;">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
+    <canvas id="galaxy" aria-hidden="true"></canvas>
+    <canvas id="vuelo" aria-hidden="true"></canvas>
+
+    <div class="ambient ambient--gold" aria-hidden="true"></div>
+    <div class="ambient ambient--teal" aria-hidden="true"></div>
+    <div class="ambient ambient--ember" aria-hidden="true"></div>
+
+    <div class="ball ball--one" aria-hidden="true">
+        <div class="shine"></div>
+        <div class="stars">
+            <div class="star"></div>
         </div>
-
-        <div class="ball"
-            style="--size: 3rem; --top: 200; --left: 300; --bottom: auto; --right: auto; --opacity: 0.4 ;">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
+    </div>
+    <div class="ball ball--two" aria-hidden="true">
+        <div class="shine"></div>
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
         </div>
-
-        <div class="ball"
-            style="--size: 4rem; --top: auto; --left: 390; --bottom: 300; --right: auto; --opacity: 0.8 ;">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
+    </div>
+    <div class="ball ball--three" aria-hidden="true">
+        <div class="shine"></div>
+        <div class="stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
         </div>
+    </div>
 
-        <div class="ball" style="--size: 5rem; --top: auto; --left: 250; --bottom: 150; --right: auto; --opacity: 0.7">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
+    <img src="img/shenlongverde.png" class="shenlong" alt="" aria-hidden="true">
+
+    <button id="sidebarToggle" class="sidebar-toggle" aria-controls="dbzSidebar" aria-expanded="false"
+        aria-label="Abrir navegación">
+        Menú
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
+
+    <div class="page-shell">
+        <aside id="dbzSidebar" class="dbz-sidebar" aria-label="Panel de navegación">
+            <div class="sidebar-panel">
+                <div class="sidebar-top">
+                    <p class="sidebar-kicker">Dragon Radar</p>
+                    <button id="sidebarClose" class="sidebar-close" aria-label="Cerrar navegación">
+                        Cerrar
+                    </button>
+                </div>
+
+                <div class="brand-block">
+                    <p class="eyebrow">Backend Developer</p>
+                    <h1>Nicolás Rodríguez</h1>
+                    <p class="brand-copy">
+                        Portfolio conceptual con identidad propia, criterio visual y foco real en producto.
+                    </p>
+                </div>
+
+                <div class="randar-box">
+                    <input type="checkbox" checked class="randar-checkbox" aria-label="Activar radar">
+                    <div class="randar-top"></div>
+                    <div class="randar-top-body"></div>
+                    <div class="randar-content">
+                        <div class="randar-ring randar-ring--one"></div>
+                        <div class="randar-ring randar-ring--two"></div>
+                        <div class="randar-ring randar-ring--three"></div>
+
+                        <div class="randar-ball" style="--top: 15; --left: 18;"></div>
+                        <div class="randar-ball" style="--top: 26; --left: 34;"></div>
+                        <div class="randar-ball" style="--top: 58; --left: 22;"></div>
+                        <div class="randar-ball" style="--top: 20; --left: 72;"></div>
+                        <div class="randar-ball" style="--top: 44; --left: 67;"></div>
+                        <div class="randar-ball" style="--top: 72; --left: 74;"></div>
+                        <img src="img/file.png" alt="Retrato ilustrado de Nicolás Rodríguez">
+                    </div>
+                    <p id="name">Nicolás Rodríguez</p>
+                    <p id="description">Técnico Universitario en Programación</p>
+                </div>
+
+                <div class="sidebar-meta">
+                    <div>
+                        <span>Experiencia</span>
+                        <strong>4+ años</strong>
+                    </div>
+                    <div>
+                        <span>Base</span>
+                        <strong>Buenos Aires</strong>
+                    </div>
+                    <div>
+                        <span>Especialidad</span>
+                        <strong>Backend & software</strong>
+                    </div>
+                </div>
+
+                <nav class="dbz-sidebar__content" aria-label="Secciones">
+                    <a href="#overview" class="nav-link is-active">
+                        <span class="nav-ball">1</span>
+                        <span>Visión general</span>
+                    </a>
+                    <a href="#concept" class="nav-link">
+                        <span class="nav-ball">2</span>
+                        <span>Concepto</span>
+                    </a>
+                    <a href="#about" class="nav-link">
+                        <span class="nav-ball">3</span>
+                        <span>Sobre mí</span>
+                    </a>
+                    <a href="#experience" class="nav-link">
+                        <span class="nav-ball">4</span>
+                        <span>Experiencia</span>
+                    </a>
+                    <a href="#focus" class="nav-link">
+                        <span class="nav-ball">5</span>
+                        <span>Qué construyo</span>
+                    </a>
+                    <a href="#stack" class="nav-link">
+                        <span class="nav-ball">6</span>
+                        <span>Tecnologías</span>
+                    </a>
+                    <a href="#education" class="nav-link">
+                        <span class="nav-ball">7</span>
+                        <span>Estudios y contacto</span>
+                    </a>
+                </nav>
+
+                <details class="soundtrack-panel">
+                    <summary>Modo nostalgia</summary>
+                    <p>
+                        La música quedó como detalle opcional. La experiencia principal ahora no depende de eso para
+                        sentirse sólida.
+                    </p>
+                    <audio id="dragonBallAudio" controls preload="none">
+                        <source src="music/Dragon Ball GT Music.mp3" type="audio/mpeg">
+                    </audio>
+                </details>
             </div>
-        </div>
-
-        <div class="ball"
-            style="--size: 3rem; --top: 100; --left: auto; --bottom: auto; --right: 340; --opacity: 0.4 ;">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-            </div>
-        </div>
-
-        <div class="ball"
-            style="--size: 4rem; --top: auto; --left: auto; --bottom: 350; --right: 490; --opacity: 0.8 ;">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
-        </div>
-
-        <div class="ball" style="--size: 6rem; --top: auto; --left: auto; --bottom: 70; --right: 400; --opacity: 0.8">
-            <div class="shine"></div>
-            <div class="stars">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-
-            </div>
-        </div>
-
-        <canvas id="vuelo"></canvas>
-        <img src="img/shenlongDBZ.png" class="shenlong" alt="">
-
-        <!-- Rayos -->
-        <canvas id="canvas"></canvas>
-
-
-        <!-- Boton Side Navbar -->
-        <button id="sidebarToggle" class="sidebar-toggle" aria-controls="dbzSidebar" aria-expanded="false"
-            aria-label="Abrir menú">
-            ☰
-        </button>
-
-        <!-- Overlay -->
-        <div class="sidebar-overlay" id="sidebarOverlay" hidden></div>
-
-        <!-- Sidebar -->
-        <aside id="dbzSidebar" class="dbz-sidebar" aria-hidden="true">
-            <header class="dbz-sidebar__header">
-                <h2 class="dbz-sidebar__title">Secciones</h2>
-                <button id="sidebarClose" class="sidebar-close" aria-controls="dbzSidebar" aria-label="Cerrar menú"
-                    style="display: none;">
-                </button>
-            </header>
-
-            <nav class="dbz-sidebar__content" aria-label="Navegación principal">
-                <button commandfor="dialogTematicaDBZ" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/VJ2Z29K/esfera1estrella.png" alt="1 Estrella">
-                    <p>¿Porque con tematica de Dragon Ball?</p>
-                </button>
-
-                <dialog id="dialogTematicaDBZ" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">¿Porque con tematica de Dragon Ball?</h6>
-                        <p class="p-2 text-light">La elección de una temática inspirada en Dragon Ball no es fortuita.
-                            Este universo representa
-                            mucho más que una serie animada: se ha consolidado como un fenómeno cultural que ha
-                            trascendido generaciones y fronteras, influyendo en valores, creatividad y mentalidad de
-                            millones de personas alrededor del mundo.
-                            <br>
-                            Desde mi perspectiva, el diseño de un portfolio no debe limitarse a una estructura rígida o
-                            convencional, sino reflejar autenticidad, identidad y creatividad. La idea nunca fue
-                            simplemente mostrar proyectos, sino construir una experiencia inmersiva que comunique quién
-                            soy y de dónde surge mi inspiración. En ese sentido, la temática de Dragon Ball me permite
-                            expandir mis capacidades creativas y técnicas al máximo, proyectando algo único que pocas
-                            veces se ha visto aplicado de manera formal en el ámbito profesional.
-                            <br>
-                            Además, diversos estudios en psicología y comunicación han analizado el impacto positivo de
-                            esta serie en el desarrollo de valores personales. Investigaciones como la publicada en el
-                            <strong>Journal of Journal of Psychology & Behavioral Science (2017)</strong> señalan que
-                            los contenidos de Dragon Ball
-                            promueven principios como la perseverancia, la amistad, el esfuerzo constante, la empatía y
-                            la superación personal —valores fundamentales también en el ejercicio profesional del
-                            desarrollo y la tecnología.
-                            <br>
-                            <br>
-                            Por último, Dragon Ball forma parte de mi historia personal. Es una obra que marcó mi
-                            infancia y que sigo disfrutando hasta hoy. Representa un espacio emocional de inspiración y
-                            motivación constante, un recordatorio de que uno siempre vuelve a donde fue feliz.
-                        </p>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogSobreMi" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/253yb57/esfera2estrella.png" alt="2 Estrellas">
-                    <p>Sobre Mi</p>
-                </button>
-
-                <dialog id="dialogSobreMi" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Sobre Mi</h6>
-                        <p class="px-2 text-light">Mi nombre es Nicolas Rodríguez, tengo 21 años, me dedico a la programacion desde
-                            hace
-                            4 años con experiencia solida en el rubro. Actualmente vivo en Buenos Aires, Argentina. Amo
-                            lo que hago, y me gusta estar en constante aprendizaje. </p>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogExperiencia" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/bLqhTPX/esfera3estrella.png" alt="3 Estrellas">
-                    <p>Experiencia Laboral</p>
-                </button>
-
-                <dialog id="dialogExperiencia" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Experiencia Laboral</h6>
-                        <div class="d-flex justify-content-center align-items-center w-100 gap-5">
-                            <a class="capsulecorp-container" href="https://www.microtrack.com.ar/">
-                                <img class="capsulecorp" src="img/CapsulaCorpVioleta.png" alt="">
-                                <h6>Micracel S.A</h6>
-                                <p class="text-light" style="font-size: 10px;">Desarrollador Backend</p>
-                                <p class="fw-semibold">Oct 2024 - Actualidad</p>
-                            </a>
-                            <a class="capsulecorp-container" href="https://vasile.com.ar/en/home-2/">
-                                <img class="capsulecorp" src="img/CapsuleCorpVerde.png" alt="">
-                                <h6>Vasile S.A.C.I</h6>
-                                <p class="text-light" style="font-size: 10px;">Desarrollador de Software</p>
-                                <p class="fw-semibold">Mar 2024 - Oct 2024</p>
-                            </a>
-                        </div>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogProyectos" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/kBR68R5/esfera4estrella.png" alt="4 Estrellas">
-                    <p>Proyectos</p>
-                </button>
-
-                <dialog id="dialogProyectos" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Proyectos</h6>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogTecnologias" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/tHbPDPY/esfer5estrella.png" alt="5 Estrellas">
-                    <p>Tecnologias</p>
-                </button>
-
-                <dialog id="dialogTecnologias" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Tecnologias</h6>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogEstudios" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/fSfpVHw/esfera6estrella.png" alt="6 Estrellas">
-                    <p>Estudios</p>
-                </button>
-
-                <dialog id="dialogEstudios" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Estudios</h6>
-                    </div>
-                </dialog>
-
-                <button commandfor="dialogContacto" command="show-modal" class="btn-dbz">
-                    <img src="https://i.ibb.co/gzKrcKK/esfera7estrella.png" alt="7 Estrellas">
-                    <p>Contacto</p>
-                </button>
-
-                <dialog id="dialogContacto" closedby="any" class="card-dialog animate__animated animate__fadeIn">
-                    <div class="card-dialog-info">
-                        <h6 class="title">Contacto</h6>
-                    </div>
-                </dialog>
-            </nav>
         </aside>
 
-        <div class="submain">
-            <div class="randar-box">
-                <input type="checkbox" checked class="randar-checkbox">
-                <div class="randar-top"></div>
-                <div class="randar-top-body"></div>
-                <div class="randar-content">
-                    <!-- Izquierda -->
-                    <div class="randar-ball" style="--top: 14; --left: 30; --bottom: 0; --right: 0;"></div>
-                    <div class="randar-ball" style="--top: 28; --left: 15; --bottom: 0; --right: 0;"></div>
-                    <div class="randar-ball" style="--top: 42; --left: 25; --bottom: 0; --right: 0;"></div>
-                    <div class="randar-ball" style="--top: 55; --left: 12; --bottom: 0; --right: 0;"></div>
+        <main class="content-shell">
+            <section id="overview" class="hero-section" data-reveal>
+                <div class="hero-copy">
+                    <p class="section-kicker">Portfolio refactorizado</p>
+                    <h2>
+                        Un lenguaje visual más serio, con la energía de Dragon Ball usada como dirección de arte y no
+                        como disfraz.
+                    </h2>
+                    <p class="hero-lead">
+                        Tomé la idea original y la llevé a una versión más moderna: mejor jerarquía, menos ruido,
+                        narrativa clara y una presencia visual más profesional sin perder identidad.
+                    </p>
 
-                    <!-- Derecha -->
-                    <div class="randar-ball" style="--top: 17; --left: 78; --bottom: 0; --right: 0;"></div>
-                    <div class="randar-ball" style="--top: 36; --left: 70; --bottom: 0; --right: 0;"></div>
-                    <div class="randar-ball" style="--top: 60; --left: 75; --bottom: 0; --right: 0;"></div>
-                    <img src="./img/file.png" alt="Avatar" width="100" height="100">
+                    <div class="hero-actions">
+                        <a href="#experience" class="primary-link">Ver experiencia</a>
+                        <a href="#education" class="secondary-link">Ir a contacto</a>
+                    </div>
+
+                    <div class="metric-grid">
+                        <article class="metric-card">
+                            <span>Perfil</span>
+                            <strong>Backend con criterio de producto</strong>
+                        </article>
+                        <article class="metric-card">
+                            <span>Objetivo</span>
+                            <strong>Interfaces memorables pero defendibles</strong>
+                        </article>
+                        <article class="metric-card">
+                            <span>Tono</span>
+                            <strong>Más premium, menos experimental</strong>
+                        </article>
+                    </div>
                 </div>
-                <p id="name">Nicolás Rodríguez</p>
-                <p id="description">Tecnico Universitario en Programación</p>
-            </div>
-        </div>
-        <div class="fixed-bottom d-flex justify-content-end align-items-center">
-            <audio id="dragonBallAudio" controls autoplay>
-                <source src="music/Dragon Ball GT Music.mp3" type="audio/mpeg">
-            </audio>
-        </div>
 
-        <!-- <div class="supersaiyajin">
-            <img class="goku" src="./img/gokuTransformandose.png" alt="Goku transformándose">
-            <img class="auraGoku" src="./img/auraSaiyan2.png" alt="Aura Super Saiyajin">
-        </div> -->
-        <!-- <img class="freezer" src="./img/freezer.png" alt="Freezer">  -->
+                <div class="hero-aside">
+                    <article class="spotlight-card spotlight-card--primary">
+                        <p class="card-label">Dirección visual</p>
+                        <h3>Cosmos oscuro, energía cálida, acentos jade y superficies técnicas.</h3>
+                        <p>
+                            La estética ahora prioriza contraste, composición y legibilidad. La referencia anime queda
+                            integrada de forma adulta.
+                        </p>
+                    </article>
+
+                    <article class="spotlight-card">
+                        <p class="card-label">Ideas para potenciar la propuesta</p>
+                        <ul>
+                            <li>Convertir cada sección en un caso de estudio con resultados y stack.</li>
+                            <li>Agregar capturas o diagramas de arquitectura reales para subir credibilidad.</li>
+                            <li>Usar el lore DBZ solo en microdetalles y naming, no como capa dominante.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="concept" class="content-section" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Concepto</p>
+                    <h2>La inspiración funciona mejor cuando organiza el relato, no cuando lo interrumpe.</h2>
+                </div>
+
+                <div class="panel-grid panel-grid--two">
+                    <article class="glass-panel">
+                        <h3>Por qué Dragon Ball sigue teniendo sentido</h3>
+                        <p>
+                            No es solo nostalgia. La temática sirve para proyectar perseverancia, crecimiento
+                            progresivo, disciplina y ambición por mejorar, valores muy alineados con el oficio técnico.
+                        </p>
+                        <p>
+                            La diferencia está en el grado de control: el nuevo diseño baja la saturación del concepto y
+                            lo usa como firma, no como exceso.
+                        </p>
+                    </article>
+
+                    <article class="glass-panel accent-panel">
+                        <h3>Qué cambió en esta versión</h3>
+                        <ul class="clean-list">
+                            <li>Los modales se reemplazaron por secciones permanentes con mejor lectura.</li>
+                            <li>La navegación ahora tiene contexto y continuidad durante todo el recorrido.</li>
+                            <li>La composición usa más aire, mejor ritmo vertical y un sistema visual consistente.</li>
+                            <li>La música quedó como guiño opcional, no como carga inicial invasiva.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="about" class="content-section" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Sobre mí</p>
+                    <h2>Desarrollo software con una mezcla de base técnica sólida y sensibilidad por cómo se presenta.</h2>
+                </div>
+
+                <div class="panel-grid panel-grid--three">
+                    <article class="glass-panel">
+                        <h3>Perfil</h3>
+                        <p>
+                            Tengo 21 años y hace más de 4 años trabajo en programación. Me interesa construir software
+                            robusto, mantenerme en evolución constante y cuidar la manera en la que una solución se
+                            comunica.
+                        </p>
+                    </article>
+
+                    <article class="glass-panel">
+                        <h3>Fortalezas</h3>
+                        <ul class="clean-list">
+                            <li>Backend y software orientado a negocio.</li>
+                            <li>Lectura rápida de problemas y refactor con intención.</li>
+                            <li>Capacidad para unir ejecución técnica con dirección visual.</li>
+                        </ul>
+                    </article>
+
+                    <article class="glass-panel">
+                        <h3>Principios</h3>
+                        <ul class="clean-list">
+                            <li>Menos ornamento gratuito, más decisiones con criterio.</li>
+                            <li>Diseño que mejora percepción sin sacrificar claridad.</li>
+                            <li>Identidad fuerte, pero siempre al servicio del contenido.</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section id="experience" class="content-section" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Experiencia</p>
+                    <h2>Trayectoria profesional presentada como piezas serias, no como popups aislados.</h2>
+                </div>
+
+                <div class="timeline">
+                    <a class="timeline-card" href="https://www.microtrack.com.ar/" target="_blank" rel="noreferrer">
+                        <div class="timeline-logo">
+                            <img src="img/CapsulaCorpVioleta.png" alt="Micracel S.A">
+                        </div>
+                        <div class="timeline-copy">
+                            <span class="timeline-date">Oct 2024 - Actualidad</span>
+                            <h3>Micracel S.A</h3>
+                            <p>Desarrollador Backend</p>
+                            <small>Trabajo sobre lógica de negocio, procesos y evolución de software empresarial.</small>
+                        </div>
+                    </a>
+
+                    <a class="timeline-card" href="https://vasile.com.ar/en/home-2/" target="_blank" rel="noreferrer">
+                        <div class="timeline-logo">
+                            <img src="img/CapsuleCorpVerde.png" alt="Vasile S.A.C.I">
+                        </div>
+                        <div class="timeline-copy">
+                            <span class="timeline-date">Mar 2024 - Oct 2024</span>
+                            <h3>Vasile S.A.C.I</h3>
+                            <p>Desarrollador de Software</p>
+                            <small>Participación en desarrollo, mejora y mantenimiento de soluciones de negocio.</small>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section id="focus" class="content-section" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Qué construyo</p>
+                    <h2>Como todavía faltan proyectos detallados, el portfolio gana fuerza mostrando áreas de impacto reales.</h2>
+                </div>
+
+                <div class="panel-grid panel-grid--three">
+                    <article class="glass-panel focus-card">
+                        <h3>Servicios y APIs</h3>
+                        <p>
+                            Diseño de lógica backend, integraciones y procesos que priorizan consistencia, trazabilidad y
+                            capacidad de crecer.
+                        </p>
+                    </article>
+
+                    <article class="glass-panel focus-card">
+                        <h3>Automatización operativa</h3>
+                        <p>
+                            Flujo de trabajo, procesos repetibles y piezas de software que resuelven tareas concretas
+                            dentro de contextos reales de negocio.
+                        </p>
+                    </article>
+
+                    <article class="glass-panel focus-card">
+                        <h3>Interfaces con identidad</h3>
+                        <p>
+                            Experiencias web que no se sienten genéricas, pero que siguen siendo legibles, ordenadas y
+                            defendibles frente a un contexto profesional.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="stack" class="content-section" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Tecnologías</p>
+                    <h2>El stack se muestra como sistema, no como una nube desordenada de logos.</h2>
+                </div>
+
+                <div class="stack-board">
+                    <div class="stack-group">
+                        <span>Backend</span>
+                        <div class="tag-row">
+                            <span>.NET</span>
+                            <span>C#</span>
+                            <span>APIs REST</span>
+                            <span>SQL</span>
+                        </div>
+                    </div>
+                    <div class="stack-group">
+                        <span>Frontend</span>
+                        <div class="tag-row">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>UI Motion</span>
+                        </div>
+                    </div>
+                    <div class="stack-group">
+                        <span>Forma de trabajo</span>
+                        <div class="tag-row">
+                            <span>Refactor</span>
+                            <span>Diseño de interfaz</span>
+                            <span>Mantenimiento</span>
+                            <span>Mejora continua</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="education" class="content-section content-section--last" data-reveal>
+                <div class="section-heading">
+                    <p class="section-kicker">Estudios y contacto</p>
+                    <h2>El cierre ahora empuja a conversación profesional y deja espacio para sumar datos reales después.</h2>
+                </div>
+
+                <div class="panel-grid panel-grid--two">
+                    <article class="glass-panel">
+                        <h3>Formación</h3>
+                        <p>
+                            Técnico Universitario en Programación. La base académica acompaña una práctica constante y
+                            experiencia de trabajo en entornos reales.
+                        </p>
+                    </article>
+
+                    <article class="glass-panel contact-panel">
+                        <h3>Próximo paso recomendado</h3>
+                        <p>
+                            Sumá enlaces reales a LinkedIn, GitHub, correo y 2 o 3 proyectos con contexto, stack,
+                            capturas y resultados. Ese cambio solo ya subiría fuerte la percepción profesional.
+                        </p>
+                        <p class="contact-note">Dejé este bloque listo para que después puedas cargar tus canales reales.</p>
+                    </article>
+                </div>
+            </section>
+        </main>
     </div>
-    <!-- #endregion Plano principal y navegación -->
 
-    <!-- Mantengo la carga del script en el mismo lugar para no afectar comportamiento/posiciones -->
     <script src="script.js"></script>
 </body>
 
