@@ -5,11 +5,13 @@
   class Sidebar {
     constructor() {
       this.sidebar = $("#dbzSidebar");
+      this.panel = this.sidebar?.querySelector(".sidebar-panel") ?? null;
       this.toggle = $("#sidebarToggle");
       this.closeBtn = $("#sidebarClose");
       this.overlay = $("#sidebarOverlay");
       this.navLinks = $$(".nav-link");
       this.desktopQuery = window.matchMedia("(min-width: 1181px)");
+      this.scrollY = 0;
 
       this.enabled = !!(this.sidebar && this.toggle && this.closeBtn && this.overlay);
       if (!this.enabled) return;
@@ -44,9 +46,14 @@
     }
 
     open() {
+      this.scrollY = window.scrollY;
       this.sidebar.classList.add("open");
+      this.sidebar.scrollTop = 0;
+      if (this.panel) this.panel.scrollTop = 0;
       this.toggle.setAttribute("aria-expanded", "true");
       this.overlay.hidden = false;
+      document.body.classList.add("sidebar-open");
+      document.body.style.top = `-${this.scrollY}px`;
       requestAnimationFrame(() => this.overlay.classList.add("show"));
     }
 
@@ -54,6 +61,9 @@
       this.sidebar.classList.remove("open");
       this.toggle.setAttribute("aria-expanded", "false");
       this.overlay.classList.remove("show");
+      document.body.classList.remove("sidebar-open");
+      document.body.style.top = "";
+      window.scrollTo(0, this.scrollY);
       window.setTimeout(() => {
         if (!this.isOpen()) this.overlay.hidden = true;
       }, 220);
@@ -65,6 +75,8 @@
       this.overlay.hidden = true;
       this.overlay.classList.remove("show");
       this.toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("sidebar-open");
+      document.body.style.top = "";
     }
   }
 
